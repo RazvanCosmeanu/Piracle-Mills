@@ -12,6 +12,8 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
 
     @IBOutlet weak var statePicker: UIPickerView!
     @IBOutlet weak var statePickerBtn: UIButton!
+    @IBOutlet weak var buyNowBtn: UIButton!
+    @IBOutlet weak var successIndicatorModal: UIView!
     
     let states = ["Alaska", "Arkansas", "Alabama", "California", "Maine", "New York"]
     
@@ -19,6 +21,7 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         super.viewDidLoad()
         statePicker.dataSource = self
         statePicker.delegate   = self
+        successIndicatorModal.isHidden = true
     }
 
     override func didReceiveMemoryWarning() {
@@ -27,7 +30,12 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     }
 
     @IBAction func stateButtonPressed(_ sender: Any) {
-        statePicker.isHidden = false
+        statePicker.isHidden  = false
+        buyNowBtn.isHidden    = true
+    }
+    
+    @IBAction func buyNowBtnPressed(_ sender: Any) {
+        successIndicatorModal.isHidden = false
     }
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
@@ -45,6 +53,7 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         statePickerBtn.setTitle(states[row], for: UIControlState.normal)
         statePicker.isHidden = true
+        buyNowBtn.isHidden    = false
     }
 
 }
